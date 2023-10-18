@@ -197,7 +197,7 @@ h2{
     list-style: none;
   }
   .footer{
-    background-color: #24262b;
+    background-color: #192655;
       padding: 70px 0;
   }
   .footer-col{
@@ -217,7 +217,7 @@ h2{
     position: absolute;
     left:0;
     bottom: -10px;
-    background-color: #e91e63;
+    background-color: #FF6969;
     height: 2px;
     box-sizing: border-box;
     width: 50px;
