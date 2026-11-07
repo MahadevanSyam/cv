@@ -1,58 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home | Mahadevan Syam</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mahadevan Syam | Mission Control</title>
+  <meta name="description" content="Portfolio of Mahadevan Syam: ECE graduate (VIT), automotive test-automation engineer at KPIT, published patent inventor, former IEEE SPS VIT Chairperson and Trinity Grade 5 keyboardist.">
+  <meta name="theme-color" content="#060a13">
+  <meta property="og:title" content="Mahadevan Syam | Mission Control">
+  <meta property="og:description" content="Automation engineer, patent inventor, keyboardist. Take the ride to orbit.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>document.documentElement.className += ' js';</script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div class="container header-content">
-      <a href="index.html" class="logo">Mahadevan Syam</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
-      <nav id="navMenu" class="nav-menu">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="skills.html">Skills</a></li>
-          <li><a href="certifications.html">Certifications</a></li>
-          <li><a href="projects.html">Projects & Publications</a></li>
-          <li><a href="experience.html">Experience</a></li>
-          <li><a href="volunteer.html">Volunteer</a></li>
-        </ul>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Launch sequence overlay (shown by script.js on first visit) -->
+  <div id="launch" class="launch" aria-hidden="true">
+    <div class="launch-inner">
+      <p class="launch-tag">MISSION CONTROL &middot; VIT &rarr; KPIT</p>
+      <div id="countdown" class="countdown">T-3</div>
+      <p id="launchStatus" class="launch-status">All systems nominal. Initiating launch sequence...</p>
+      <button id="skipLaunch" class="btn btn-ghost" type="button">Skip launch &rarr;</button>
+    </div>
+    <div class="launch-flame"></div>
+  </div>
+
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div id="progressBar" class="progress-bar" aria-hidden="true"></div>
+
+  <!-- Altimeter -->
+  <aside id="altimeter" class="altimeter" aria-hidden="true">
+    <div class="alt-readout"><span id="altReadout">000</span><small>KM</small></div>
+    <div class="alt-track">
+      <div id="altFill" class="alt-fill"></div>
+      <div id="altRocket" class="alt-rocket">&#128640;</div>
+      <span class="alt-mark" style="bottom:100%">100</span>
+      <span class="alt-mark" style="bottom:50%">50</span>
+      <span class="alt-mark" style="bottom:0%">0</span>
+    </div>
+    <div id="altNote" class="alt-note">STAGE 1 &middot; SOLID</div>
+  </aside>
+
+  <header id="siteHeader" class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand" aria-label="Mahadevan Syam, back to top"><span class="brand-dot"></span>M.SYAM</a>
+      <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="navLinks" class="nav-links" aria-label="Primary">
+        <a href="#about" data-nav="about">Briefing</a>
+        <a href="#missions" data-nav="missions">Missions</a>
+        <a href="#lab" data-nav="lab">Lab</a>
+        <a href="#certificates" data-nav="certificates">Certificates</a>
+        <a href="#skills" data-nav="skills">Toolkit</a>
+        <a href="#jam" data-nav="jam">Jam Session</a>
+        <a href="#contact" data-nav="contact" class="nav-cta">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <section id="home-hero">
-      <div style="text-align:center; margin-top:2rem;">
-        <img src="images/profile.jpg" alt="Your Name" class="responsive" style="max-width:150px; border-radius:50%;">
-        <h1 style="margin-top:1rem;">Hi, I'm Mahadevan Syam</h1>
-        <p>I am a 4th year B. Tech student pursuing Electronics and Communication engineering from Vellore Institute of Technology, Vellore Campus.</p>
+  <main id="main">
+    <!-- HERO -->
+    <section id="top" class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="sec-tag reveal">// MISSION CONTROL &middot; ONLINE</p>
+          <h1 class="reveal">Mahadevan<br><span class="grad">Syam</span></h1>
+          <p class="typed-line reveal"><span class="prompt">&gt;</span> <span id="typed">Automation Engineer</span><span class="cursor">&#9610;</span></p>
+          <p class="lede reveal">
+            An ECE graduate from VIT turned automotive test-automation engineer. I teach test benches to run
+            themselves, I've put a patent application and a piano on the same CV, and I once helped lead
+            a 200+ member engineering society.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-primary" href="#missions">View mission log</a>
+            <a class="btn btn-ghost" href="#contact">Open a channel</a>
+          </div>
+          <p class="scroll-hint reveal">Scroll to gain altitude &darr;</p>
+        </div>
+
+        <div class="hero-panel reveal">
+          <div class="orbit-wrap" aria-hidden="true">
+            <div class="planet"><span>MS</span></div>
+            <div class="ring ring-1"><i class="sat">AI/ML</i></div>
+            <div class="ring ring-2"><i class="sat">Automation</i></div>
+            <div class="ring ring-3"><i class="sat">Business</i></div>
+            <div class="ring ring-4"><i class="sat">Embedded</i></div>
+          </div>
+          <dl class="telemetry">
+            <div><dt>ROLE</dt><dd>Associate Engineer</dd></div>
+            <div><dt>ORGANISATION</dt><dd>KPIT Technologies</dd></div>
+            <div><dt>CLIENTS</dt><dd>CARIAD &middot; HONDA</dd></div>
+            <div><dt>LAUNCH PAD</dt><dd>VIT Vellore</dd></div>
+            <div><dt>STATUS</dt><dd class="ok"><span class="pulse"></span>In orbit since Aug 2025</dd></div>
+          </dl>
+        </div>
       </div>
     </section>
 
-    <section id="about" style="margin-top:3rem;">
-      <h2 class="section-title">About Me</h2>
-      <p>I'm Mahadevan Syam, a final-year Electronics and Communication Engineering student at Vellore Institute of Technology with a strong passion for embedded systems, VLSI design, and AI/ML integration. With a CGPA of 8.78 and a track record of hands-on project experience, I actively seek opportunities that combine deep technical knowledge with real-world impact.
+    <!-- BRIEFING -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <p class="sec-tag reveal">// 01 &mdash; MISSION BRIEFING</p>
+        <h2 class="reveal">Who's at the controls</h2>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+              I work where electronics meets software. My background is Electronics and Communication
+              Engineering, my day job is making automotive software testing faster and more reliable, and my
+              favourite side quests involve oscillators, sensors and keyboards (the musical kind).
+            </p>
+            <p>
+              At KPIT I build Python automation and CI pipelines for AUDI (CARIAD) and HONDA programmes, and I've
+              helped build an internal platform that generates test scripts straight from requirements. Before that
+              I interned across ISRO's avionics division, an embedded-sensor startup and C-DAC, and chaired IEEE SPS
+              at VIT for a year.
+            </p>
+            <p>
+              I like projects where engineering rigour and business sense have to share the same room.
+            </p>
+          </div>
 
-Throughout my academic journey, I’ve been involved in impactful research and development work, including the publication of a book chapter on IoT in education and multiple technical projects such as an IoT-based health monitoring system and a deep learning solution for COVID-19 detection. Most notably, I’m currently awaiting the publication of my VLSI-focused research on a Quad-Core VCO architecture targeting 5G/mmWave systems, showcasing my proficiency in high-frequency circuit design and simulation.
+          <div class="edu reveal">
+            <h3 class="mini-title">Flight academy</h3>
+            <ul class="edu-list">
+              <li>
+                <span class="edu-year">2025</span>
+                <div><strong>B.Tech, Electronics &amp; Communication</strong><br>Vellore Institute of Technology, Vellore Campus<br><em>CGPA 8.82 / 10</em></div>
+              </li>
+              <li>
+                <span class="edu-year">2021</span>
+                <div><strong>ISC, Class XII</strong><br>Sarvodaya Vidyalaya, Thiruvananthapuram<br><em>91.4%</em></div>
+              </li>
+              <li>
+                <span class="edu-year">2019</span>
+                <div><strong>ICSE, Class X</strong><br>Sarvodaya Vidyalaya, Thiruvananthapuram<br><em>93%</em></div>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-Professionally, I’ve completed internships at prestigious organizations like ISRO’s Vikram Sarabhai Space Center, where I worked on FPGA-based LVDT signal conditioning, and CDAC, where I built an IoT-based health monitoring framework with live data processing and visualization. I’ve also interned at startups like iOrbit and JOL Energy, where I contributed to next-generation patient care systems and EV charger designs.
+        <div id="statGrid" class="stat-grid">
+          <div class="stat reveal"><div class="stat-num" data-count="85" data-prefix="~" data-suffix="%">0</div><p>of manual testing workflows automated for HONDA</p></div>
+          <div class="stat reveal"><div class="stat-num" data-count="80" data-prefix="~" data-suffix="%">0</div><p>of AUDI (CARIAD) test cases automated in Python</p></div>
+          <div class="stat reveal"><div class="stat-num" data-count="95" data-prefix="~" data-suffix="%">0</div><p>accuracy from a requirement-to-test-script generator</p></div>
+          <div class="stat reveal"><div class="stat-num" data-count="200" data-suffix="+">0</div><p>members led as Chairperson, IEEE SPS VIT</p></div>
+          <div class="stat reveal"><div class="stat-num" data-count="75000" data-prefix="&#8377;" data-suffix="+" data-format="indian">0</div><p>in event budgets formulated for hackathons &amp; workshops</p></div>
+          <div class="stat reveal"><div class="stat-num" data-count="70">0</div><p>students nationwide in the cohort I was selected into at ISRO VSSC</p></div>
+        </div>
+      </div>
+    </section>
 
-As the former Chairperson of the IEEE SPS VIT Student Chapter, I’ve led a 200+ member team, mentored juniors, and organized technical events like hackathons and workshops. These roles have helped me develop leadership, communication, and mentorship skills alongside my technical expertise.
+    <!-- MISSION LOG -->
+    <section id="missions" class="section">
+      <div class="wrap">
+        <p class="sec-tag reveal">// 02 &mdash; MISSION LOG</p>
+        <h2 class="reveal">Flights so far</h2>
 
-I’m fluent in Python, C, VHDL, and web technologies, with beginner-level experience in TensorFlow, Keras, and Scikit-learn. I'm always keen to push boundaries in embedded systems, AI, and VLSI, and am actively building a profile that blends strong theoretical foundations with practical innovation.</p>
+        <div class="timeline">
+          <article class="mission reveal">
+            <div class="mission-node"></div>
+            <div class="mission-card">
+              <header>
+                <span class="mission-id">MISSION 04 &middot; ACTIVE</span>
+                <h3>Associate Engineer <span class="at">@ KPIT Technologies Ltd</span></h3>
+                <p class="when">Feb 2026 &ndash; Present &nbsp;&middot;&nbsp; previously Trainee, CARIAD client (Aug 2025 &ndash; Jan 2026)</p>
+              </header>
+              <ul>
+                <li>Worked with a cross-functional engineering team to automate <strong>~85%</strong> of manual testing workflows for <strong>HONDA</strong>, cutting manual intervention.</li>
+                <li>Deployed and maintained <strong>Jenkins CI pipelines</strong> for overnight automated execution, improving resource utilisation and keeping test runs continuous.</li>
+                <li>Wrote <strong>Python automation test scripts</strong> on a proprietary framework for <strong>AUDI (CARIAD)</strong>, automating <strong>~80%</strong> of test cases.</li>
+                <li>Part of a 3-member team that built an <strong>automation platform that generates test scripts from requirements</strong> with ~95% accuracy.</li>
+              </ul>
+              <div class="chips"><span>Python</span><span>Jenkins</span><span>CI/CD</span><span>Test automation</span><span>Automotive</span></div>
+            </div>
+          </article>
+
+          <article class="mission reveal">
+            <div class="mission-node"></div>
+            <div class="mission-card">
+              <header>
+                <span class="mission-id">MISSION 03 &middot; LEADERSHIP</span>
+                <h3>Chairperson <span class="at">@ IEEE SPS, VIT</span></h3>
+                <p class="when">Jan 2024 &ndash; Dec 2024 &nbsp;&middot;&nbsp; core member 2023 &ndash; 2024</p>
+              </header>
+              <ul>
+                <li>Directed an executive committee and a team of <strong>200+ members</strong>, overseeing strategic operations, technical training and a mini-project incubation model for junior members.</li>
+                <li>Formulated budgets exceeding <strong>&#8377;75,000</strong> for hackathons and workshops with <strong>300+ participants per event</strong>, and negotiated corporate sponsorships to extend the society's financial runway.</li>
+              </ul>
+              <div class="chips"><span>Leadership</span><span>Budgeting</span><span>Sponsorships</span><span>Events</span></div>
+            </div>
+          </article>
+
+          <article class="mission reveal">
+            <div class="mission-node"></div>
+            <div class="mission-card">
+              <header>
+                <span class="mission-id">MISSION 02 &middot; INTERNSHIPS</span>
+                <h3>Three internships, three launch pads</h3>
+                <p class="when">Aug 2023 &ndash; Nov 2023</p>
+              </header>
+              <div class="intern-grid">
+                <div class="intern">
+                  <h4>Vikram Sarabhai Space Centre (ISRO)</h4>
+                  <p class="role">Avionics Intern &middot; Nov 2023</p>
+                  <p>Selected among 70 students nationwide. Designed and modelled mission-critical modules for the PSLV avionics division, working to zero-error aerospace standards.</p>
+                </div>
+                <div class="intern">
+                  <h4>iOrbit Digital Technology</h4>
+                  <p class="role">Embedded Intern &middot; Oct 2023</p>
+                  <p>Developed data-processing scripts for fibre-optic mat sensors, improving accuracy by ~30%.</p>
+                </div>
+                <div class="intern">
+                  <h4>C-DAC</h4>
+                  <p class="role">Project Intern &middot; Aug &ndash; Sept 2023</p>
+                  <p>Built an IoT monitoring system integrating automation, database architecture and real-time analytics.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="mission reveal">
+            <div class="mission-node"></div>
+            <div class="mission-card">
+              <header>
+                <span class="mission-id">MISSION 01 &middot; SIDE QUESTS</span>
+                <h3>Working beyond the lab</h3>
+                <p class="when">During B.Tech at VIT</p>
+              </header>
+              <div class="intern-grid two">
+                <div class="intern">
+                  <h4>Jol Energy <small>(VIT-TBI)</small></h4>
+                  <p class="role">Early-stage startup</p>
+                  <p>Worked directly with the founding team, bridging technical feature development and business-development initiatives.</p>
+                </div>
+                <div class="intern">
+                  <h4>Ayuda NGO <small>(VIT)</small></h4>
+                  <p class="role">Digital outreach &amp; media</p>
+                  <p>Created media and ran digital outreach that drove a ~30% increase in social media engagement for community initiatives.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB -->
+    <section id="lab" class="section">
+      <div class="wrap">
+        <p class="sec-tag reveal">// 03 &mdash; THE LAB</p>
+        <h2 class="reveal">Patents &amp; publications</h2>
+        <div class="lab-grid">
+          <article class="lab-card featured reveal">
+            <span class="badge">PATENT PUBLISHED &middot; 2025</span>
+            <h3>Quad Core VCO Architecture</h3>
+            <p class="meta">Primary Inventor &middot; Application No. 202541122101</p>
+            <p>
+              A novel Voltage-Controlled Oscillator architecture, recognised for its scalability,
+              cost-efficiency and market potential across consumer electronics and aerospace.
+            </p>
+            <svg class="wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 30 Q 25 0 50 30 T 100 30 T 150 30 T 200 30 T 250 30 T 300 30 T 350 30 T 400 30" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </article>
+          <article class="lab-card reveal">
+            <span class="badge alt">BOOK CHAPTER &middot; 2022</span>
+            <h3>IoT-Based Automation for ESL Classrooms</h3>
+            <p class="meta">Peer-reviewed &middot; Co-author</p>
+            <p>Co-authored research on applying IoT systems to improve learning outcomes in English-as-a-second-language environments.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="section">
+      <div class="wrap">
+        <p class="sec-tag reveal">// 04 &mdash; CERTIFICATE VAULT</p>
+        <h2 class="reveal">Credentials &amp; recognition</h2>
+        <p class="section-sub reveal">Click any certificate with a scan to inspect it full-size.</p>
+        <div id="certFilters" class="filters reveal" role="group" aria-label="Filter certificates"></div>
+        <div id="certGrid" class="cert-grid"></div>
+      </div>
+    </section>
+
+    <!-- TOOLKIT -->
+    <section id="skills" class="section">
+      <div class="wrap">
+        <p class="sec-tag reveal">// 05 &mdash; PAYLOAD</p>
+        <h2 class="reveal">Toolkit</h2>
+        <div class="skill-cols">
+          <div class="skill-box reveal">
+            <h3 class="mini-title">Technical</h3>
+            <div class="skill-chips">
+              <span>Python</span><span>AI / ML</span><span>Automation</span><span>C</span><span>Embedded Systems</span><span>Automotive</span>
+            </div>
+          </div>
+          <div class="skill-box reveal">
+            <h3 class="mini-title">Tools &amp; workflow</h3>
+            <div class="skill-chips">
+              <span>Advanced Excel</span><span>PowerBI</span><span>JIRA</span><span>Zephyr</span><span>Confluence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JAM SESSION -->
+    <section id="jam" class="section">
+      <div class="wrap">
+        <p class="sec-tag reveal">// 06 &mdash; OFF-DUTY</p>
+        <h2 class="reveal">Jam session</h2>
+        <p class="section-sub reveal">
+          I'm a Trinity College London Grade 5 certified keyboardist. Take the controls: click or tap the keys,
+          or use your computer keyboard (<kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>F</kbd> <kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> <kbd>;</kbd> for white keys, <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd> <kbd>O</kbd> <kbd>P</kbd> for black).
+        </p>
+        <div class="piano-shell reveal">
+          <div id="piano" class="piano" role="group" aria-label="Playable piano keyboard"></div>
+          <div class="piano-bar">
+            <button id="playMotif" class="btn btn-primary" type="button">&#9654; Play a little motif</button>
+            <span id="pianoStatus" class="piano-status">Audio wakes up on your first key press.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="wrap">
+        <p class="sec-tag reveal">// 07 &mdash; OPEN A CHANNEL</p>
+        <h2 class="reveal">Orbit reached. Say hello.</h2>
+        <div class="contact-grid">
+          <div class="contact-links reveal">
+            <p>
+              Open to conversations about automation, embedded systems, automotive software and the
+              place where engineering meets business.
+            </p>
+            <ul>
+              <li><span>EMAIL</span><a href="mailto:mahadevansyam@gmail.com">mahadevansyam@gmail.com</a></li>
+              <li><span>LINKEDIN</span><a id="linkedinLink" href="https://www.linkedin.com/search/results/people/?keywords=Mahadevan%20Syam" target="_blank" rel="noopener noreferrer">Mahadevan Syam</a></li>
+              <li id="githubItem" hidden><span>GITHUB</span><a id="githubLink" href="#" target="_blank" rel="noopener noreferrer">GitHub profile</a></li>
+              <li><span>BASE</span><b>Thiruvananthapuram, Kerala, India</b></li>
+            </ul>
+          </div>
+          <form id="contactForm" class="contact-form reveal" novalidate>
+            <label for="cName">Your name</label>
+            <input id="cName" name="name" type="text" autocomplete="name" placeholder="Ada Lovelace" required>
+            <label for="cMsg">Message</label>
+            <textarea id="cMsg" name="message" rows="5" placeholder="Hi Mahadevan, ..." required></textarea>
+            <button class="btn btn-primary" type="submit">Transmit &#128225;</button>
+            <p id="formNote" class="form-note" role="status">This opens your email app with the message ready to send.</p>
+          </form>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Mahadevan Syam. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year">2026</span> Mahadevan Syam &middot; Built with HTML, CSS and a little JavaScript.</p>
+      <button id="replayLaunch" class="link-btn" type="button">&#8635; Replay launch</button>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Certificate viewer">
+    <button id="lbClose" class="lb-btn lb-close" type="button" aria-label="Close">&times;</button>
+    <button id="lbPrev" class="lb-btn lb-prev" type="button" aria-label="Previous certificate">&#8249;</button>
+    <figure>
+      <img id="lbImg" alt="">
+      <figcaption id="lbCap"></figcaption>
+    </figure>
+    <button id="lbNext" class="lb-btn lb-next" type="button" aria-label="Next certificate">&#8250;</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
